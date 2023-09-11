@@ -25,7 +25,7 @@ print_head "download dependencies"
 pip3.6 install -r requirements.txt
 
 print_head "create service file"
-sed -i -e "s|rabbitmq_pass|${rabbitmq_pass}" ${script_path}/payment.service
+sed -i -e "s|rabbitmq_pass|${rabbitmq_pass}|" ${script_path}/payment.service
 cp ${script_path}/payment.service /etc/systemd/system/payment.service
 
 print_head "start service"
