@@ -4,7 +4,7 @@ source ${script_path}/common.sh
 
 
 print_head "create mongo repo"
-cp mongo.repo /etc/yum.repos.d/mongo.repo
+cp ${script_path}/mongo.repo /etc/yum.repos.d/mongo.repo
 
 print_head "install mongodb"
 dnf install mongodb-org -y
