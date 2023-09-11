@@ -1,4 +1,5 @@
 app_user=roboshop
+mysql_root_pass=$1
 
 print_head() {
   echo -e "\e[35m>>>>>>>> $1 <<<<<<<<\e[0m"
