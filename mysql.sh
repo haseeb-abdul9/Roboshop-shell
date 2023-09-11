@@ -19,7 +19,6 @@ dnf install mysql-community-server -y
 print_head "start service"
 systemctl enable mysqld
 systemctl start mysqld
-systemctl restart mysqld
 
 print_head "set mysql_root_password"
 mysql_secure_installation --set-root-pass ${mysql_root_pass}
