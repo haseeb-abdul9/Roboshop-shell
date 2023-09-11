@@ -40,7 +40,7 @@ systemctl enable ${component}
 systemctl start ${component}
 
 print_head "Change MySQl default password"
-mysql -h mysql-dev.haseebdevops.online -uroot -pRoboShop@1 < /app/schema/${component}.sql
+mysql -h mysql-dev.haseebdevops.online -uroot -p${mysql_root_pass} < /app/schema/${component}.sql
 
 print_head "restart ${component}"
 systemctl restart ${component}
