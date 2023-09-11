@@ -20,8 +20,7 @@ unzip /tmp/${component}.zip
 print_head "configure nginx reverse proxy"
 cp ${script_path}/roboshop.conf /etc/nginx/default.d/roboshop.conf
 
-
-
+print_head "start nginx"
 systemctl enable nginx
 systemctl start nginx
 systemctl restart nginx 
