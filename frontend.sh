@@ -4,7 +4,7 @@ source ${script_path}/common.sh
 
 component=frontend
 
-print_head "install"
+print_head "install nginx"
 dnf install nginx -y
 
 print_head "remove nginx content"
@@ -18,7 +18,7 @@ cd /usr/share/nginx/html
 unzip /tmp/${component}.zip
 
 print_head "configure nginx reverse proxy"
-cp /etc/nginx/default.d/roboshop.conf
+cp ${script_path}/roboshop.conf /etc/nginx/default.d/roboshop.conf
 
 
 
