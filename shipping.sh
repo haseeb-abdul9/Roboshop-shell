@@ -18,16 +18,16 @@ rm -rf /app
 mkdir /app
 
 print_head "download & unzip app content"
-curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping.zip
+curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip
 cd /app
-unzip /tmp/shipping.zip
+unzip /tmp/${component}.zip
 
 print_head "download dependencies"
 mvn clean package
-mv target/shipping-1.0.jar shipping.jar
+mv target/${component}-1.0.jar ${component}.jar
 
 print_head "create service file"
-cp ${script_path}/shipping.service /etc/systemd/system/shipping.service
+cp ${script_path}/${component}.service /etc/systemd/system/${component}.service
 
 print_head "load service"
 systemctl daemon-reload
@@ -35,10 +35,12 @@ systemctl daemon-reload
 print_head "load schema"
 dnf install mysql -y
 
-print_head "Change MySQl default password"
-mysql -h mysql-dev.haseebdevops.online -uroot -pRoboShop@1 < /app/schema/shipping.sql
+print_head "start ${component}"
+systemctl enable ${component}
+systemctl start ${component}
 
-print_head "start shipping"
-systemctl enable shipping
-systemctl start shipping
-systemctl restart shipping
+print_head "Change MySQl default password"
+mysql -h mysql-dev.haseebdevops.online -uroot -pRoboShop@1 < /app/schema/${component}.sql
+
+print_head "restart ${component}"
+systemctl restart ${component}
