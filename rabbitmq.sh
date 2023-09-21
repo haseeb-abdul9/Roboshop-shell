@@ -8,17 +8,17 @@ if [ -z "$rabbitmq_pass" ]; then
 fi
 
 print_head "configure erlang & rabbitmq yum repos"
-curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
-curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash
+curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash &>>$log_file
+curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash &>>$log_file
 
 print_head "install rabbitmq server"
-dnf install rabbitmq-server -y
+dnf install rabbitmq-server -y &>>$log_file
 
 print_head "start service"
-systemctl enable rabbitmq-server
-systemctl restart rabbitmq-server
+systemctl enable rabbitmq-server &>>$log_file
+systemctl restart rabbitmq-server &>>$log_file
 
 print_head "add username & pass"
-rabbitmqctl add_user roboshop ${rabbitmq_pass}
-rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+rabbitmqctl add_user roboshop ${rabbitmq_pass} &>>$log_file
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$log_file
 
