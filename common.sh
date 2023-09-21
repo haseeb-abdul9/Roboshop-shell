@@ -28,7 +28,7 @@ func_schema_setup() {
     func_stat_check $?
     mongo --host mongodb-dev.haseebdevops.online </app/schema/${component}.js &>>$log_file
     func_stat_check $?
-  else
+  fi
   if [ "$schema_setup" == "mysql" ]; then
     func_print_head "load schema"
     dnf install mysql -y &>>$log_file
