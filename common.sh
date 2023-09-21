@@ -11,7 +11,7 @@ func_stat_check() {
   if [ $1 -eq 0 ]; then
     echo -e "\e[32mSuccess\e[0m"
   else
-    echo - e "\e[31mFailure\e[0m"
+    echo -e "\e[31mFailure\e[0m"
     echo -e "Refer /tmp/roboshop.log for more information"
     exit 1
   fi
@@ -29,7 +29,7 @@ func_schema_setup() {
     mongo --host mongodb-dev.haseebdevops.online </app/schema/${component}.js &>>$log_file
     func_stat_check $?
   fi
-  if [ "$schema_setup" == "mysql"]; then
+  if [ "$schema_setup" == "mysql" ]; then
     func_print_head "load schema"
     dnf install mysql -y &>>$log_file
     func_stat_check $?
