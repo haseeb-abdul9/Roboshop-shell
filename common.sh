@@ -69,9 +69,7 @@ func_systemd_setup() {
 
     func_print_head "start ${component}"
     systemctl daemon-reload &>>$log_file
-    func_stat_check $?
     systemctl enable ${component} &>>$log_file
-    func_stat_check $?
     systemctl restart ${component} &>>$log_file
     func_stat_check $?
 }

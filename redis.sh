@@ -2,7 +2,6 @@ script=$(realpath "$0")
 script_path=$(dirname "$script")
 source ${script_path}/common.sh
 
-component=redis
 
 func_print_head "download redis & enable 6.2 version"
 dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y &>>$log_file
@@ -20,6 +19,5 @@ func_stat_check $?
 
 func_print_head "start redis"
 systemctl enable redis &>>$log_file
-func_stat_check $?
 systemctl restart redis &>>$log_file
 func_stat_check $?
