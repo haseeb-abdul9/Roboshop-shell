@@ -104,6 +104,10 @@ func_python() {
   pip3.6 install -r requirements.txt &>>$log_file
   func_stat_check $?
 
+  func_print_head "Change Passwords"
+  sed -i -e "s|rabbitmq_pass|${rabbitmq_pass}|" ${script_path}/payment.service &>>$log_file
+  func_stat_check $?
+
   func_systemd_setup
 }
 
