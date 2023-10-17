@@ -4,7 +4,7 @@ source ${script_path}/common.sh
 
 if [ -z "$mysql_root_pass" ]; then
   echo mysql_root_pass missing
-  exit
+  exit 1
 fi
 
 func_print_head "disable default mysql"

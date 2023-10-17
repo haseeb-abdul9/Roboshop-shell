@@ -4,7 +4,7 @@ source ${script_path}/common.sh
 
 if [ -z "$rabbitmq_pass" ]; then
   echo rabbitmq_pass missing
-  exit
+  exit 1
 fi
 
 component=payment
