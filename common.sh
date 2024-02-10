@@ -43,23 +43,25 @@ func_schema_setup() {
 
 func_app_prereq() {
   func_print_head "add app user & directory"
-    id ${app_user} &>>$log_file
+  id ${app_user} &>>$log_file
     if [ $? -ne 0 ]; then
       useradd ${app_user} &>>$log_file
     fi
-    func_stat_check $?
-    rm -rf /app &>>$log_file
-    func_stat_check $?
-    mkdir /app &>>$log_file
-    func_stat_check $?
+  func_stat_check $?
 
-    func_print_head "download & unzip app content"
-    curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>$log_file
-    func_stat_check $?
-    cd /app &>>$log_file
-    func_stat_check $?
-    unzip /tmp/${component}.zip &>>$log_file
-    func_stat_check $?
+  func_print_head "create app dependencies"
+  rm -rf /app &>>$log_file
+  mkdir /app &>>$log_file
+  func_stat_check $?
+
+  func_print_head "download content"
+  curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>$log_file
+  func_stat_check $?
+
+  func_print_head "Unzip app content"
+  cd /app &>>$log_file
+  unzip /tmp/${component}.zip &>>$log_file
+  func_stat_check $?
 }
 
 func_systemd_setup() {
